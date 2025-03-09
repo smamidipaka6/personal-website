@@ -295,7 +295,7 @@ export default function TravelMap() {
       <div className="text-sm text-gray-500">
         Map Status:{" "}
         {isLoaded
-          ? "Loaded. Tryna seperate Alaska and Hawaii into their own entities"
+          ? "Loaded! Tryna seperate Alaska and Hawaii into their own entities"
           : error
           ? "Error"
           : "Loading..."}
