@@ -709,12 +709,12 @@ const Page = () => {
             target="_blank"
             rel="noopener noreferrer"
             style={{ cursor: "pointer" }}
-            className="px-2.5 py-1 bg-[#027FBC] rounded-md text-white text-xs inline-flex items-center shadow-sm font-bold hover:opacity-90"
+            className="px-3 py-1.5 bg-[#027FBC] rounded-md text-white text-sm inline-flex items-center shadow-sm font-bold hover:opacity-90"
           >
             <img
               src="/LinkedIn_icon_circle.svg.png"
               alt="LinkedIn"
-              className="h-4 w-4 mr-1.5"
+              className="h-5 w-5 mr-2"
             />
             LinkedIn
           </a>
@@ -726,12 +726,12 @@ const Page = () => {
               background: "linear-gradient(45deg, #FCAF45, #FD1D1D, #833AB4)",
               cursor: "pointer",
             }}
-            className="px-2.5 py-1 rounded-md text-white text-xs inline-flex items-center shadow-sm font-bold hover:opacity-90"
+            className="px-3 py-1.5 rounded-md text-white text-sm inline-flex items-center shadow-sm font-bold hover:opacity-90"
           >
             <img
               src="/Instagram_icon.png.webp"
               alt="Instagram"
-              className="h-4 w-4 mr-1.5"
+              className="h-5 w-5 mr-2"
             />
             Instagram
           </a>
@@ -740,24 +740,20 @@ const Page = () => {
             target="_blank"
             rel="noopener noreferrer"
             style={{ cursor: "pointer" }}
-            className="px-2.5 py-1 bg-[#333] rounded-md text-white text-xs inline-flex items-center shadow-sm font-bold hover:opacity-90"
+            className="px-3 py-1.5 bg-[#333] rounded-md text-white text-sm inline-flex items-center shadow-sm font-bold hover:opacity-90"
           >
-            <img
-              src="/github_icon.png"
-              alt="GitHub"
-              className="h-4 w-4 mr-1.5"
-            />
+            <img src="/github_icon.png" alt="GitHub" className="h-5 w-5 mr-2" />
             GitHub
           </a>
           <a
             href="mailto:sahit.mamidipaka@gmail.com"
             style={{ cursor: "pointer" }}
-            className="px-2.5 py-1 bg-[#FF7F50] rounded-md text-white text-xs inline-flex items-center shadow-sm font-bold hover:opacity-90"
+            className="px-3 py-1.5 bg-[#FF7F50] rounded-md text-white text-sm inline-flex items-center shadow-sm font-bold hover:opacity-90"
           >
             <img
               src="/google-mail-gmail-icon-logo-symbol-free-png.webp"
               alt="Email"
-              className="h-4 w-auto mr-1.5"
+              className="h-5 w-auto mr-2"
             />
             Email
           </a>
