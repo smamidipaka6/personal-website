@@ -582,12 +582,26 @@ const Page = () => {
               <div className="text-base text-gray-300 break-inside-avoid">
                 • Tokyo, Japan{" "}
                 <span className="text-gray-400">
-                  (for Shibuya Crossing & Subway 🚇)
+                  (for Shibuya Crossing & Subway{" "}
+                  <img
+                    src="/satoru-gojo.png"
+                    alt="Satoru Gojo"
+                    className="inline-block h-5 w-auto align-text-bottom"
+                  />
+                  )
                 </span>
               </div>
               <div className="text-base text-gray-300 break-inside-avoid">
                 • Kyoto, Japan{" "}
-                <span className="text-gray-400">(for Cherry Blossoms 🌸)</span>
+                <span className="text-gray-400">
+                  (for Cherry Blossoms{" "}
+                  <img
+                    src="/cherry-blossoms.png"
+                    alt="Cherry Blossoms"
+                    className="inline-block h-5 w-auto align-text-bottom"
+                  />
+                  )
+                </span>
               </div>
               <div className="text-base text-gray-300 break-inside-avoid">
                 • Rio de Janeiro, Brazil{" "}
@@ -599,7 +613,15 @@ const Page = () => {
               </div>
               <div className="text-base text-gray-300 break-inside-avoid">
                 • Scottish Highlands, Scotland{" "}
-                <span className="text-gray-400">(for the cowsss 🐄)</span>
+                <span className="text-gray-400">
+                  (for the cowsss{" "}
+                  <img
+                    src="/highland-cow.png"
+                    alt="Highland Cow"
+                    className="inline-block h-5 w-auto align-text-bottom"
+                  />
+                  )
+                </span>
               </div>
               <div className="text-base text-gray-300 break-inside-avoid">
                 • Amalfi Coast, Italy
