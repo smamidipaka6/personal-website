@@ -29,6 +29,7 @@ const Page = () => {
 
   const [currentQuoteIndex, setCurrentQuoteIndex] = useState(0);
   const [fadeIn, setFadeIn] = useState(true);
+  const [visitedQuotes, setVisitedQuotes] = useState(new Set([0])); // Start with the first quote as visited
 
   const rotateQuote = () => {
     // First fade out
@@ -36,7 +37,36 @@ const Page = () => {
 
     // After fade out completes, change quote and fade in
     setTimeout(() => {
-      setCurrentQuoteIndex((prevIndex) => (prevIndex + 1) % quotes.length);
+      // Get available unvisited quote indices
+      const availableIndices = Array.from(
+        { length: quotes.length },
+        (_, i) => i
+      ).filter((index) => !visitedQuotes.has(index));
+
+      // If all quotes have been visited, reset the visited set
+      if (availableIndices.length === 0) {
+        const newIndex = Math.floor(Math.random() * quotes.length);
+        // Avoid showing the same quote twice in a row when resetting
+        const nextIndex =
+          newIndex === currentQuoteIndex
+            ? (newIndex + 1) % quotes.length
+            : newIndex;
+
+        setCurrentQuoteIndex(nextIndex);
+        setVisitedQuotes(new Set([nextIndex]));
+      } else {
+        // Pick a random unvisited quote
+        const randomIndex = Math.floor(Math.random() * availableIndices.length);
+        const nextQuoteIndex = availableIndices[randomIndex];
+
+        setCurrentQuoteIndex(nextQuoteIndex);
+        setVisitedQuotes((prevVisited) => {
+          const newVisited = new Set(prevVisited);
+          newVisited.add(nextQuoteIndex);
+          return newVisited;
+        });
+      }
+
       setFadeIn(true);
     }, 300); // Match this with the CSS transition duration
   };
@@ -178,8 +208,9 @@ const Page = () => {
                 got to work near the ATL airport
               </li>
               <li>
-                Traveled a lot (3 Countries, 3 Continents, and Counting...).
-                Gained a lot of perspective and appreciation for travel
+                Traveled a lot (5 Cities, 3 Countries, 3 Continents, and
+                Counting...). Gained a lot of perspective and appreciation for
+                travel
               </li>
             </ul>
             <br />
@@ -428,14 +459,229 @@ const Page = () => {
       </div>
 
       {/* Travel section with wider width */}
-      <div className="w-[105%] max-w-[850px] text-sm text-left line-relaxed px-4 my-8">
-        <p className="font-semibold text-foreground/60 text-center [&::selection]:bg-[#4C1D95] [&::selection]:text-white text-xl">
+      <div className="w-[105%] max-w-[850px] text-sm text-left line-relaxed px-4 mt-8">
+        <p className="font-semibold text-foreground/60 text-center [&::selection]:bg-[#00C853] [&::selection]:text-white text-xl">
           Travel
         </p>
 
-        <div>
+        <div className="mt-6 mb-2 [&_*::selection]:bg-[#00C853] [&_*::selection]:text-black">
+          <p className="text-base leading-relaxed">
+            I truly love traveling—the stunning beauty of towering cliffs and
+            turquoise waters, the novelty of smells and tastes of exotic
+            cuisines, the hustle and bustle of diverse cities, and the intense
+            confusion of foreign languages—they make life more interesting,
+            meaningful, and worth living.
+          </p>
+          <p className="text-base leading-relaxed mt-4">
+            And through both personal choices and external circumstances, I've
+            been very fortunate to be able to travel as much as I have during my
+            time in college.
+          </p>
+          <p className="text-base leading-relaxed mt-4">
+            Every new city presents a new perspective that I take away, shaping
+            me my worldview country by country.
+          </p>
+
+          <div className="mt-6 px-6 border-l-4 border-[#32E875] rounded-r-md">
+            <p className="text-xl font-bold text-center text-white mb-2">
+              Current Travel Stats
+            </p>
+            <div className="flex flex-wrap justify-center gap-x-8 gap-y-2">
+              <div className="text-center">
+                <span className="text-2xl font-bold text-[#32E875]">40+</span>
+                <p className="text-sm text-gray-300">Cities</p>
+              </div>
+              <div className="text-center">
+                <span className="text-2xl font-bold text-[#32E875]">25</span>
+                <p className="text-sm text-gray-300">Countries</p>
+              </div>
+              <div className="text-center">
+                <span className="text-2xl font-bold text-[#32E875]">5</span>
+                <p className="text-sm text-gray-300">Continents</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="">
           <div>
             <TravelMap />
+          </div>
+        </div>
+
+        <div className="mt-10 space-y-8 [&_*::selection]:bg-[#00C853] [&_*::selection]:text-black">
+          {/* Countries I've Been To */}
+          <div>
+            <h3 className="text-lg font-medium text-white mb-4 inline-block border-b-2 border-[#32E875] pb-1">
+              Countries I've Been To
+            </h3>
+
+            <div className="grid grid-cols-4 gap-x-4 mt-4">
+              {/* Column 1: Childhood */}
+              <div>
+                <h4 className="text-[#32E875] font-medium mb-2">Childhood</h4>
+                <div className="space-y-1">
+                  <div className="text-base text-gray-300">• United States</div>
+                  <div className="text-base text-gray-300">• India</div>
+                </div>
+              </div>
+
+              {/* Column 2-3: Study Abroad (split into two columns) */}
+              <div className="col-span-2">
+                <h4 className="text-[#32E875] font-medium mb-2">
+                  Study Abroad
+                </h4>
+                <div className="grid grid-cols-2 gap-x-4">
+                  <div className="space-y-1">
+                    <div className="text-base text-gray-300">• France</div>
+                    <div className="text-base text-gray-300">• Luxembourg</div>
+                    <div className="text-base text-gray-300">• Ireland</div>
+                    <div className="text-base text-gray-300">
+                      • Northern Ireland
+                    </div>
+                    <div className="text-base text-gray-300">• Netherlands</div>
+                    <div className="text-base text-gray-300">• Belgium</div>
+                    <div className="text-base text-gray-300">• Germany</div>
+                    <div className="text-base text-gray-300">• Switzerland</div>
+                    <div className="text-base text-gray-300">• Italy</div>
+                    <div className="text-base text-gray-300">• Monaco</div>
+                  </div>
+                  <div className="space-y-1">
+                    <div className="text-base text-gray-300">• Czechia</div>
+                    <div className="text-base text-gray-300">• Austria</div>
+                    <div className="text-base text-gray-300">• Hungary</div>
+                    <div className="text-base text-gray-300">• Denmark</div>
+                    <div className="text-base text-gray-300">• Catalonia</div>
+                    <div className="text-base text-gray-300">• Portugal</div>
+                    <div className="text-base text-gray-300">• Spain</div>
+                    <div className="text-base text-gray-300">• Gibraltar</div>
+                    <div className="text-base text-gray-300">• Morocco</div>
+                    <div className="text-base text-gray-300">• Egypt</div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Column 4: Delta */}
+              <div>
+                <h4 className="text-[#32E875] font-medium mb-2">Delta</h4>
+                <div className="space-y-1">
+                  <div className="text-base text-gray-300">• Chile</div>
+                  <div className="text-base text-gray-300">• South Korea</div>
+                  <div className="text-base text-gray-300">• Costa Rica</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Travel Bucket List */}
+          <div>
+            <h3 className="text-lg font-medium text-white mb-4 inline-block border-b-2 border-[#32E875] pb-1">
+              Travel Bucket List
+            </h3>
+            <div className="columns-2 sm:columns-3 md:columns-4 gap-x-4 space-y-1 mt-4">
+              <div className="text-base text-gray-300 break-inside-avoid">
+                • Tokyo, Japan{" "}
+                <span className="text-gray-400">
+                  (for Shibuya Crossing & Subway 🚇)
+                </span>
+              </div>
+              <div className="text-base text-gray-300 break-inside-avoid">
+                • Kyoto, Japan{" "}
+                <span className="text-gray-400">(for Cherry Blossoms 🌸)</span>
+              </div>
+              <div className="text-base text-gray-300 break-inside-avoid">
+                • Rio de Janeiro, Brazil{" "}
+                <span className="text-gray-400">(for Carnival 🎭)</span>
+              </div>
+              <div className="text-base text-gray-300 break-inside-avoid">
+                • Manaus, Brazil{" "}
+                <span className="text-gray-400">(the real Amazon 🌴)</span>
+              </div>
+              <div className="text-base text-gray-300 break-inside-avoid">
+                • Scottish Highlands, Scotland{" "}
+                <span className="text-gray-400">(for the cowsss 🐄)</span>
+              </div>
+              <div className="text-base text-gray-300 break-inside-avoid">
+                • Amalfi Coast, Italy
+              </div>
+              <div className="text-base text-gray-300 break-inside-avoid">
+                • Cape Town, South Africa
+              </div>
+              <div className="text-base text-gray-300 break-inside-avoid">
+                • Madagascar
+              </div>
+              <div className="text-base text-gray-300 break-inside-avoid">
+                • Shanghai, China
+              </div>
+              <div className="text-base text-gray-300 break-inside-avoid">
+                • Hong Kong, China
+              </div>
+              <div className="text-base text-gray-300 break-inside-avoid">
+                • Dubai, UAE
+              </div>
+              <div className="text-base text-gray-300 break-inside-avoid">
+                • Moscow, Russia
+              </div>
+              <div className="text-base text-gray-300 break-inside-avoid">
+                • Tel Aviv, Israel
+              </div>
+              <div className="text-base text-gray-300 break-inside-avoid">
+                • Athens, Italy
+              </div>
+              <div className="text-base text-gray-300 break-inside-avoid">
+                • Istanbul, Turkey
+              </div>
+              <div className="text-base text-gray-300 break-inside-avoid">
+                • Bangkok, Thailand
+              </div>
+              <div className="text-base text-gray-300 break-inside-avoid">
+                • Bali, Indonesia
+              </div>
+              <div className="text-base text-gray-300 break-inside-avoid">
+                • New Zealand{" "}
+                <span className="text-gray-400">(koalas and kangaroos 🦘)</span>
+              </div>
+              <div className="text-base text-gray-300 break-inside-avoid">
+                • Antarctica{" "}
+                <span className="text-gray-400">(just cuz + penguins 🐧)</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Places You'd Think I've Been To */}
+          <div>
+            <h3 className="text-lg font-medium text-white mb-4 inline-block border-b-2 border-[#32E875] pb-1">
+              Places You'd Think I've Been To, But Haven't
+            </h3>
+            <div className="columns-2 sm:columns-3 md:columns-4 gap-x-4 space-y-1 mt-4">
+              <div className="text-base text-gray-300 break-inside-avoid">
+                • London, UK
+              </div>
+              <div className="text-base text-gray-300 break-inside-avoid">
+                • Rome, Italy
+              </div>
+              <div className="text-base text-gray-300 break-inside-avoid">
+                • North India
+              </div>
+              <div className="text-base text-gray-300 break-inside-avoid">
+                • Nearly All U.S. National Parks
+              </div>
+              <div className="text-base text-gray-300 break-inside-avoid">
+                • All of California
+              </div>
+              <div className="text-base text-gray-300 break-inside-avoid">
+                • Chicago, Illinois
+              </div>
+              <div className="text-base text-gray-300 break-inside-avoid">
+                • Seattle, Washington
+              </div>
+              <div className="text-base text-gray-300 break-inside-avoid">
+                • Orlando, Florida
+              </div>
+              <div className="text-base text-gray-300 break-inside-avoid">
+                • Disneyland, Disney World, and Universal Studios
+              </div>
+            </div>
           </div>
         </div>
       </div>
